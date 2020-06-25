@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: workflow-engine
+
+aws:
+  secretsmanager:
+    name: workflow-engine
+    prefix: /secret
+    fail-fast: true
+    profile-separator: _
+    enabled: ${AWS_SECRETS_MANAGER_ENABLED:false}
+    default-context: application
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      auto: ${AWS_REGION_AUTO:false}
+      static: ${AWS_REGION:eu-west-2}
+    credentials:
+      access-key: ${AWS_ACCESS_KEY:}
+      secret-key: ${AWS_SECRET_KEY:}

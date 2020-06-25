@@ -1,0 +1,37 @@
+{
+  "textField": "API-A-20200120-17",
+  "textField2": "APPLES",
+  "submit": true,
+  "lastName": "XXXXX-AAAA",
+  "businessKey": "businessKey",
+  "shiftDetailsContext": {
+    "shifthours": 1,
+    "phone": "+44788756341",
+    "locationid": "1",
+    "enddatetime": "2020-11-22T16:42:05",
+    "teamid": "880bee2a-f381-4c81-be30-49e9340660f7",
+    "currentLocationName": null,
+    "staffid": "112f6ed3-29e5-4517-a2be-1c1a09f21be3",
+    "email": "aminmc@gmail.com",
+    "shiftid": null,
+    "startdatetime": "2019-11-20T16:46:05",
+    "shiftminutes": 0,
+    "roles": []
+  },
+  "environmentContext": {
+    "referenceDataUrl": "http://localhost:8000",
+    "workflowUrl": "http://localhost:8000",
+    "operationalDataUrl": "http://localhost:8000",
+    "privateUiUrl": "http://localhost:8001"
+  },
+  "form": {
+    "formVersionId": "84a32079-8e8b-4042-91db-c75d1cc3933a",
+    "formId": "d8e0ea6d-e12d-4291-8938-b86db773527f",
+    "title": "l5vp40zwx1",
+    "name": "vloigdgx2mr",
+    "submissionDate": "2020-01-28T08:31:55.297Z",
+    "process": {
+      "definitionId": "test:1:b51fe446-0aa1-11ea-b74f-0e03b1b23d15"
+    }
+  }
+}

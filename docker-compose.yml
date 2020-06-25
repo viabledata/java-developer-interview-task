@@ -1,0 +1,65 @@
+---
+version: '3.7'
+
+volumes:
+  postgres_data_workflow:
+    driver: local
+
+services:
+  postgres_workflow:
+    image: postgres:10-alpine
+    restart: on-failure
+    container_name: postgres_workflow
+    volumes:
+      - postgres_data_workflow:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: workflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: workflow
+    networks:
+      - db
+    labels:
+      - "traefik.enable=false"
+
+  redis_workflow:
+    image: redis:5-alpine
+    container_name: redis_workflow
+    networks:
+      - db
+    labels:
+      - "traefik.enable=false"
+
+  engine:
+    build: .
+    image: quay.io/ukhomeofficedigital/cop-private-workflow-engine
+    restart: on-failure
+    container_name: engine
+    environment:
+      ENGINE_NAME: engine
+      ENGINE_SPRING_PROFILES_ACTIVE: local
+      ENGINE_AWS_ACCESS_KEY_ID: xxxx
+      ENGINE_AWS_SECRET_ACCESS_KEY: xxxx
+      AWS_SECRETS_MANAGER_ENABLED: true
+      AWS_REGION: eu-west-2
+      AWS_REGION_AUTH: false
+      AWS_EC2_METADATA_DISABLED: true
+    depends_on:
+      - postgres_workflow
+      - redis_workflow
+    networks:
+      - web
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:workflow.${DOMAINNAME}"
+      - "traefik.port=8080"
+      - "traefik.protocol=http"
+      - "traefik.docker.network=web"
+
+networks:
+  db:
+    external:
+      name: db
+  web:
+    external:
+      name: web

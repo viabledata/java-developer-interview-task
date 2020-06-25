@@ -1,0 +1,116 @@
+keycloak:
+  auth-server-url: ${keycloak.auth-server-url}
+  public-client: ${keycloak.public-client}
+  realm: ${keycloak.realm}
+  resource: ${keycloak.resource}
+  bearer-only: ${keycloak.bearer-only}
+  ssl-required: ${keycloak.ssl-required}
+  use-resource-role-mappings: ${keycloak.use-resource-role-mappings}
+  principal-attribute: ${keycloak.principal-attribute}
+  enable-basic-auth: ${keycloak.enable-basic-auth}
+  credentials:
+    secret: ${keycloak.credentials.secret}
+
+encryption:
+  passPhrase: ${encryption.passphrase}
+  salt:  ${encryption.salt}
+
+public-ui:
+    protocol: ${public-ui.protocol}
+    text-protocol: ${public-ui.text-protocol}
+
+cors:
+  origins: ${cors.origins}
+
+api-ref:
+  url: ${api-ref.url}
+
+form-api:
+  url: ${form-api.url}
+
+api-cop:
+    url: ${api-cop.url}
+    connect-timeout: ${api-cop.connect-timeout}
+    read-timeout: ${api-cop.read-timeout}
+
+aws:
+  region: ${aws.region:eu-west-2}
+  case-bucket-name: ${aws.case-bucket-name}
+  credentials:
+    access-key: ${aws.credentials.access-key}
+    secret-Key: ${aws.credentials.secret-key}
+  elastic-search:
+    region: ${aws.elastic.search.region:eu-west-2}
+    endpoint:  ${aws.elastic.search.endpoint:}
+    credentials:
+      access-key: ${aws.credentials.access-key:}
+      secret-key: ${aws.credentials.access-key:}
+
+gov:
+  notify:
+    api:
+      key: ${gov.notify.api.key}
+      notification:
+        emailTemplateId: ${gov.notify.api.notification.email-template-id}
+        smsTemplateId:  ${gov.notify.api.notification.sms-template-id}
+
+camunda:
+  bpm:
+    process-engine-name: ${camunda.bpm.process-engine-name}
+    database:
+      type: ${camunda.bpm.database.type}
+    deployment-resource-pattern:
+    - classpath*:**/*.bpmn
+    - classpath*:**/*.bpmn20.xml
+    - classpath*:**/*.dmn
+    - classpath*:**/*.dmn11.xml
+    - classpath*:**/*.cmmn
+    - classpath*:**/*.cmmn10.xml
+    - classpath*:**/*.cmmn11.xml
+
+spring:
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    password: ${spring.datasource.password}
+    username: ${spring.datasource.username}
+    url: ${spring.datasource.url}
+    hikari:
+      maximum-pool-size: 30
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSqlLimit: 2048
+        prepStmtCacheSize: 250
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration,org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration,
+  http:
+    converters:
+      preferred-json-mapper: jackson
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss"
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics
+  #
+  #logging:
+  #  pattern:
+  #    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] [%X{mdcData}] %-5level %logger{36} - %msg%n"
+logging:
+  pattern:
+    level: "%X{mdcData}%5p"
+  level:
+    org.springframework.web.socket: ERROR
+    com.amazonaws.util.EC2MetadataUtils: ERROR
+
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: ${server.port:8080}
+
+

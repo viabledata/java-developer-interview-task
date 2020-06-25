@@ -1,0 +1,10 @@
+.idea
+build
+.gradle
+borders-private-workflow-engine.iml
+out/
+dist/
+jgiven-reports/
+.DS_Store
+workflow-resources
+src/main/resources/application.x.yml
